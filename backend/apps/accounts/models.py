@@ -41,7 +41,7 @@ class User(AbstractUser):
         (ROLE_TEACHER, "Учитель"),
         (ROLE_STUDENT, "Студент"),
     )
-    usernmame = None
+    username = None
     role = models.SmallIntegerField("Роль", choices=ROLES, default=ROLE_STUDENT)
     pin = models.CharField('ПИН', max_length=15, unique=True)
     email = models.EmailField("Email")
@@ -80,5 +80,5 @@ class TeacherProfile(models.Model):
 
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    student_group = models.ForeignKey(StudentGroup, on_delete=models.PROTECT, related_name="students")
+    student_group = models.ForeignKey(StudentGroup, on_delete=models.PROTECT, related_name="students", null=True)
     parent_phone = models.CharField("Телефон родителя", max_length=10)
