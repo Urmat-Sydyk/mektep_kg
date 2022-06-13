@@ -73,12 +73,12 @@ class TeacherProfile(models.Model):
         (POSITION_TEACHER, "преподаватель"),
         (POSITION_OTHER, "другое"),
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='teacher')
     position = models.CharField("Должность", max_length=30, choices=POSITION_STATUS, default=POSITION_OTHER)
     subject = models.ForeignKey(Subject, on_delete=models.PROTECT, related_name='teachers')
 
 
 class StudentProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student')
     student_group = models.ForeignKey(StudentGroup, on_delete=models.PROTECT, related_name="students", null=True)
     parent_phone = models.CharField("Телефон родителя", max_length=10)

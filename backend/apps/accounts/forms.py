@@ -54,7 +54,7 @@ class UserRegisterForm(UserCreationForm):
     )
     birthday = forms.DateField(
         label='Дата рождения',
-        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Дата рождения'})
+        widget=forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Дата рождения'})
     )
     address = forms.CharField(
         label='Адрес',

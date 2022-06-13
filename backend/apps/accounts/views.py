@@ -1,19 +1,20 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 
 # Create your views here.
+
 from django.views.generic import FormView, CreateView, TemplateView
 
 from backend.apps.accounts.forms import LoginForm, UserRegisterForm, ProfileForm
-from backend.apps.accounts.models import StudentProfile
 
 
-def index(request):
-    print(request)
-    return HttpResponse("Accounts")
+class UserProfilePage(LoginRequiredMixin, TemplateView):
+    template_name = 'user_profile.html'
 
 
 class LoginView(FormView):
@@ -28,7 +29,7 @@ class LoginView(FormView):
         if user is not None:
             if user.is_active:
                 login(self.request, user)
-                return redirect('index')
+                return redirect('user_profile')
             else:
                 return HttpResponse('Ваш аккаунт не активен')
         return HttpResponse('Такого пользователя не сушествует или пароль неверный')
@@ -52,17 +53,7 @@ def userRegister(request):
     return render(request, 'register.html', context)
 
 
-# class UserRegisterView(CreateView):
-#     template_name = 'register.html'
-#     form_class = UserRegisterForm
-#     success_url = reverse_lazy('register_done')
-
-
-# class StudentRegisterView(CreateView):
-#     template_name = 'register.html'
-#     form_class = StudentRegisterForm
-#     success_url = reverse_lazy('register_done')
-
-
-class RegisterDoneView(TemplateView):
-    template_name = 'register_done.html'
+def user_logout(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('sign_in')
