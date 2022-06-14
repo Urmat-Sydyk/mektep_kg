@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.core import validators
 
 from backend.apps.accounts.models import User, StudentProfile
@@ -94,3 +94,27 @@ class ProfileForm(forms.ModelForm):
         fields = [
             'parent_phone'
         ]
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'avatar',
+            'first_name',
+            'middle_name',
+            'last_name',
+            'email',
+            'phone',
+            'address',
+        ]
+        widgets = {
+            'avatar': forms.FileInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'middle_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+

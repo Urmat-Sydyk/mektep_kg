@@ -1,20 +1,20 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 
 # Create your views here.
 
-from django.views.generic import FormView, CreateView, TemplateView
+from django.views.generic import FormView, CreateView, TemplateView, UpdateView
 
-from backend.apps.accounts.forms import LoginForm, UserRegisterForm, ProfileForm
+from backend.apps.accounts.forms import *
 
 
-class UserProfilePage(LoginRequiredMixin, TemplateView):
-    template_name = 'user_profile.html'
+
 
 
 class LoginView(FormView):
@@ -57,3 +57,26 @@ def user_logout(request):
     if request.user.is_authenticated:
         logout(request)
     return redirect('sign_in')
+
+
+class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    form_class = UserUpdateForm
+    template_name = 'user_update.html'
+    success_url = reverse_lazy('user_profile')
+    queryset = User.objects.all()
+    model = User
+
+    def test_func(self):    # проверка на совпадение айдишек залогиненного пользователя и айдишки с 'url'
+        if self.kwargs.get('pk') == self.request.user.pk:
+            return True
+        return False
+
+
+class UserProfilePage(LoginRequiredMixin, TemplateView):
+    template_name = 'user_profile.html'
+
+
+
+class UserPasswordChangeView(PasswordChangeView):
+    template_name = 'change_password.html'
+    success_url=reverse_lazy('logout')
