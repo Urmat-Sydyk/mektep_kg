@@ -21,12 +21,16 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(StudentProfile)
 class StudentProfileAdmin(admin.ModelAdmin):
     list_display = [
+        'user',
         'parent_phone',
+        'student_group'
         ]
 
 
 @admin.register(TeacherProfile)
 class TeacherProfileAdmin(admin.ModelAdmin):
     list_display = [
+        'user',
         'position',
+        'subject'
         ]

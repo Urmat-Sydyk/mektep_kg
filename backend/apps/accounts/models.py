@@ -31,9 +31,6 @@ class UserManager(BaseUserManager):
         return self.create_user(pin, password, **extra_fields)
 
 
-
-# if user.role == User.ROLE_STUDENT:
-
 class User(AbstractUser):
     ROLE_TEACHER = 0
     ROLE_STUDENT = 1
@@ -59,6 +56,9 @@ class User(AbstractUser):
 
     objects = UserManager()
 
+    def __str__(self):
+        return f'{self.first_name} {self.middle_name}'
+
 
 class TeacherProfile(models.Model):
     POSITION_DIRECTOR = "director"
@@ -73,12 +73,32 @@ class TeacherProfile(models.Model):
         (POSITION_TEACHER, "преподаватель"),
         (POSITION_OTHER, "другое"),
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='teacher')
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='teacher',
+        verbose_name='Преподаватель',
+        limit_choices_to={'role': False}
+    )
     position = models.CharField("Должность", max_length=30, choices=POSITION_STATUS, default=POSITION_OTHER)
     subject = models.ForeignKey(Subject, on_delete=models.PROTECT, related_name='teachers')
 
+    class Meta:
+        verbose_name = 'Профиль преподавателя'
+        verbose_name_plural = 'Профили преподавателей'
+
 
 class StudentProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student')
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='student',
+        verbose_name='Ученик',
+        limit_choices_to={'role': True}
+    )
     student_group = models.ForeignKey(StudentGroup, on_delete=models.PROTECT, related_name="students", null=True)
     parent_phone = models.CharField("Телефон родителя", max_length=10)
+
+    class Meta:
+        verbose_name = 'Профиль ученика'
+        verbose_name_plural = 'Профили учеников'

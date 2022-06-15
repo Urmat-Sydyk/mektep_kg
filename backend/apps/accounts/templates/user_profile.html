@@ -45,7 +45,7 @@
 
                 <div class="card-body">
                     <strong><i class="fas fa-book mr-1"></i>Класс</strong>
-                    <p class="text-muted">{{ request.user.student.group }}</p>
+                    <p class="text-muted">{{ request.user.student.student_group }}</p>
                     <hr>
                     <strong><i class="fas fa-map-marker-alt mr-1"></i>Адрес проживания</strong>
                     <p class="text-muted">{{ request.user.address }}</p>
@@ -69,7 +69,7 @@
             <div class="card card-primary">
               <div class="card-header">
                 <ul class="nav nav-pills">
-                  <h3 class="card-title">Уголок {{ request.user.student.group }} класса</h3>
+                  <h3 class="card-title">Уголок "{{ request.user.student.student_group }}" класса</h3>
 <!--                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>-->
                 </ul>
               </div><!-- /.card-header -->

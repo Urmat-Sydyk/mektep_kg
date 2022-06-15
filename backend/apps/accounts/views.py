@@ -76,7 +76,6 @@ class UserProfilePage(LoginRequiredMixin, TemplateView):
     template_name = 'user_profile.html'
 
 
-
 class UserPasswordChangeView(PasswordChangeView):
     template_name = 'change_password.html'
     success_url=reverse_lazy('logout')
