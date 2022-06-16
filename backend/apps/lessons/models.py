@@ -1,3 +1,4 @@
+
 from django.db import models
 
 # Create your models here.
@@ -63,7 +64,7 @@ class LessonTime(models.Model):
         verbose_name_plural = 'Уроки'
 
     def __str__(self):
-        return f'{self.number}){self.start} - {self.end}'
+        return f'{self.start} - {self.end}'
 
 
 class TimeTable(models.Model):

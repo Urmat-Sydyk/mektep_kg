@@ -9,12 +9,10 @@ from django.urls import reverse_lazy
 
 # Create your views here.
 
-from django.views.generic import FormView, CreateView, TemplateView, UpdateView
+from django.views.generic import FormView, CreateView, TemplateView, UpdateView, ListView
 
 from backend.apps.accounts.forms import *
-
-
-
+from backend.apps.posts.models import Post
 
 
 class LoginView(FormView):
@@ -72,10 +70,24 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
-class UserProfilePage(LoginRequiredMixin, TemplateView):
+# Add posts with filter to user profile
+class UserProfilePage(LoginRequiredMixin, ListView):
+    model = Post
     template_name = 'user_profile.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        queryset = Post.objects.filter(group=self.request.user.student.student_group)
+        return queryset
+
+    @staticmethod
+    def post_authors():
+        return User.objects.filter(role=False)
+
 
 
 class UserPasswordChangeView(PasswordChangeView):
     template_name = 'change_password.html'
     success_url=reverse_lazy('logout')
+
+
