@@ -26,37 +26,7 @@
 <div class="row">
 <div class="col-md-6">
 
-    <div class="col-md-6">
-<div class="card card-info">
-  <div class="card-header">
-    <h3 class="card-title">Понедельник</h3>
-  </div>
-              <!-- /.card-header -->
-  <div class="card-body">
-    <table class="table table-bordered">
-
-      <thead>
-
-        <tr>
-        {% for grade in grades %}
-          <th>{{grade.grade_date}}</th>
-        {% endfor %}
-        </tr>
-      </thead>
-      <tbody>
-{% for grade in grades %}
-        <tr>
-          <td></td>
-          <td></td>
-          <td>{{grade.subject}}</td>
-          <td>{{grade.value}}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
-</div>
+<!--    <div class="col-md-6">-->
 <!--<div class="card card-info">-->
 <!--  <div class="card-header">-->
 <!--    <h3 class="card-title">Понедельник</h3>-->
@@ -64,31 +34,64 @@
 <!--              &lt;!&ndash; /.card-header &ndash;&gt;-->
 <!--  <div class="card-body">-->
 <!--    <table class="table table-bordered">-->
+
 <!--      <thead>-->
+
 <!--        <tr>-->
-<!--          <th style="width: 10px">№</th>-->
-<!--          <th>Время</th>-->
-<!--          <th>Предмет</th>-->
-<!--          <th >Преподаватель</th>-->
-<!--          <th >Кабинет</th>-->
+<!--        {% for grade in grades %}-->
+<!--          <th>{{grade.grade_date}}</th>-->
+<!--        {% endfor %}-->
 <!--        </tr>-->
 <!--      </thead>-->
 <!--      <tbody>-->
-<!--      {% for i in time_tables %}-->
-<!--      {% if i.weeks == '1'%}-->
+<!--{% for grade in grades %}-->
 <!--        <tr>-->
 <!--          <td></td>-->
-<!--          <td>{{i.lesson}}</td>-->
-<!--          <td>{{ i.subject }}</td>-->
-<!--          <td>{{i.teacher}}</td>-->
-<!--          <td>{{i.room}}</td>-->
+<!--          <td></td>-->
+<!--          <td>{{grade.subject}}</td>-->
+<!--          <td>{{grade.value}}</td>-->
 <!--        </tr>-->
-<!--      {% endif %}-->
 <!--      {% endfor %}-->
 <!--      </tbody>-->
 <!--    </table>-->
 <!--  </div>-->
 <!--</div>-->
+<!--</div>-->
+<div class="card card-info">
+  <div class="card-header">
+    <h3 class="card-title">Понедельник</h3>
+  </div>
+              <!-- /.card-header -->
+  <div class="card-body">
+    <table class="table table-bordered">
+<!--      <thead>-->
+<!--        <tr>-->
+<!--          <th>Предмет</th>-->
+<!--        </tr>-->
+<!--      </thead>-->
+      <tbody>
+      {% for key, value in grades.items %}
+        <tr>
+          <td>{{key}}</td>
+          {% for key, value in value.items %}
+
+<!--            {% for i in value %}-->
+<!--              {{i}}-->
+<!--            {% endfor %}-->
+                <td>
+                {{key}}
+                </td>
+                <td>
+               {{value}}
+                </td>
+          {% endfor %}
+<!--          <td>{{grades.grade}}</td>-->
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 </div>
 
 
