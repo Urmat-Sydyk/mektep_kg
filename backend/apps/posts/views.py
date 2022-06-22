@@ -20,3 +20,4 @@ class PostListView(ListView):
     paginate_by = 4
     template_name ='post_list.html'
     context_object_name = 'posts'
+    ordering = ['-created']

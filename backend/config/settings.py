@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'backend.apps.accounts',
     'backend.apps.lessons',
     'backend.apps.posts',
+    'backend.apps.school_info'
 ]
 
 MIDDLEWARE = [

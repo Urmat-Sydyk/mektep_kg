@@ -35,13 +35,19 @@ class StudentGradeTableView(ListView):
     def get_queryset(self):
         queryset = Grade.objects.filter(student=self.request.user.id).order_by('grade_date')
         grades_data = {}
+        # grades_data['all_dates'] = []
         # print(queryset)
         for i in queryset:
-            print(i.subject, i.value, i.grade_date, i.teacher)
             if i.subject not in grades_data:
                 grades_data[i.subject] = {str(i.grade_date): str(i.value)}
+                # if str(i.grade_date) not in grades_data['all_dates']:
+                #     grades_data['all_dates'].append(str(i.grade_date))
             else:
                 grades_data[i.subject][str(i.grade_date)] = str(i.value)
+                # if str(i.grade_date) not in grades_data['all_dates']:
+                #     grades_data['all_dates'].append(str(i.grade_date))
 
         print(grades_data)
         return grades_data
+
+
