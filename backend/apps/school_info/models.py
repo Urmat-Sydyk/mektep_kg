@@ -16,7 +16,7 @@ class SchoolInfo(models.Model):
     founded = models.DateField('Основан')
     about_us = models.TextField(verbose_name='О нас')
     our_history = models.TextField(verbose_name='Наша история')
-    school_image = models.ImageField('Лого', upload_to='school_info/')
+    school_image = models.ImageField('Фото школы', upload_to='school_info/')
 
     class Meta:
         verbose_name = 'Информация о школе'

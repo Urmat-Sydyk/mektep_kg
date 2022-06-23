@@ -16,6 +16,4 @@ class SchoolInfoAdmin(admin.ModelAdmin):
         'logo',
         'background_image',
         'school_image',
-        'about_us',
-        'our_history'
     ]
