@@ -74,7 +74,8 @@
 <!-- School info header END -->
 
 
-{% block content %}
+<!-- Blog section -->
+{% block post_news %}
     <div class="container">
 			<div class="section-title text-center">
 				<h3>ПОСЛЕДНИЕ НОВОСТИ</h3>
@@ -130,7 +131,56 @@
 <!--            </div>-->
 <!--&lt;!&ndash;		EndPagination&ndash;&gt;-->
 		</div>
-{% endblock content %}
+{% endblock post_news %}
+<!-- Blog section -->
+
+
+<!-- Fact section -->
+{% block info_fact %}
+	<section class="fact-section spad set-bg" data-setbg="{% static '/unico/img/fact-bg.jpg' %}">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 fact">
+					<div class="fact-icon">
+						<i class="ti-crown"></i>
+					</div>
+					<div class="fact-text">
+						<h2>{{ years }}</h2>
+						<p>ЛЕТ</p>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 fact">
+					<div class="fact-icon">
+						<i class="ti-briefcase"></i>
+					</div>
+					<div class="fact-text">
+						<h2>{{ teachers }}</h2>
+						<p>ПРЕПОДАВАТЕЛЕЙ</p>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 fact">
+					<div class="fact-icon">
+						<i class="ti-user"></i>
+					</div>
+					<div class="fact-text">
+						<h2>{{ students }}</h2>
+						<p>УЧАЩИХСЯ</p>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 fact">
+					<div class="fact-icon">
+						<i class="ti-pencil-alt"></i>
+					</div>
+					<div class="fact-text">
+						<h2>{{ subjects }}+</h2>
+						<p>ПРЕДМЕТОВ</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock info_fact %}
+<!-- Fact section end-->
 
 
 {% block info_footer %}
@@ -143,11 +193,9 @@
 						<img src="{{ school_info.logo.url }}" alt="">
 						<p>{{ school_info.slogan }}</p>
 						<div class="social pt-1">
-							<a href=""><i class="fa fa-twitter-square"></i></a>
-							<a href=""><i class="fa fa-facebook-square"></i></a>
-							<a href=""><i class="fa fa-google-plus-square"></i></a>
-							<a href=""><i class="fa fa-linkedin-square"></i></a>
-							<a href=""><i class="fa fa-rss-square"></i></a>
+							{% for social in socials %}
+							<a href="{{social.link}}"><i class="{{social.awesome_class}}"></i></a>
+							{% endfor %}
 						</div>
 					</div>
 				</div>

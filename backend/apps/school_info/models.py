@@ -20,6 +20,7 @@ class SchoolInfo(models.Model):
 
     class Meta:
         verbose_name = 'Информация о школе'
+        verbose_name_plural = 'Информация о школе'
 
     def __str__(self):
         return self.name
@@ -56,7 +57,8 @@ class Service(models.Model):
 
 class SocialLink(models.Model):
     title = models.CharField(max_length=255, verbose_name='Названия')
-    icon = models.ImageField('Изображение', upload_to='icons/')
+    icon = models.ImageField('Изображение', upload_to='icons/', null=True, blank=True)
+    awesome_class = models.CharField(max_length=100, verbose_name='Awesome', null=True)
     link = models.CharField(max_length=100, verbose_name='Ссылка')
 
     class Meta:
@@ -74,6 +76,7 @@ class Gallery(models.Model):
 
     class Meta:
         verbose_name = 'Галерея'
+        verbose_name_plural = 'Галерея'
 
     def __str__(self):
         return self.title
