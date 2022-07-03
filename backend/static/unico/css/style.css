@@ -306,13 +306,20 @@ ol {
 
 .nav-section .nav-right {
 	float: right;
-	padding-top: 23px;
+
 }
 
 .nav-section .nav-right a {
-	color: #fff;
-	margin-left: 30px;
-	font-size: 16px;
+	display: inline-block;
+  color: #fff;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 25px 20px;
+  margin-right: -5px;
+  -webkit-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
 }
 
 .main-menu {
@@ -339,6 +346,11 @@ ol {
 .main-menu li a:hover {
 	background: #f6783a;
 }
+
+.nav-section .container .nav-right a:hover {
+  background: #f6783a;
+}
+
 
 .main-menu li.active a {
 	background: #f6783a;
@@ -1898,3 +1910,4 @@ ol {
 		padding-left: 0;
 	}
 }
+

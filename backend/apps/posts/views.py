@@ -7,7 +7,7 @@ from datetime import date
 
 
 # Create your views here.
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 
 from backend.apps.accounts.models import User
 from backend.apps.lessons.models import Subject
@@ -36,6 +36,17 @@ class PostListView(ListView):
         context['courses'] = Course.objects.all().order_by('-created')[:3]
         context['galleries'] = Gallery.objects.all().order_by('-created')[:8]
         context['services'] = Service.objects.all().order_by('-created')[:6]
-        context['socials'] = SocialLink.objects.all()
+        return context
+
+
+class AboutUsView(ListView):
+    model = User
+    template_name = 'about_us.html'
+    paginate_by = 2
+    ordering = ['-id']
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutUsView, self).get_context_data(**kwargs)
+        context['teachers'] = User.objects.filter(role=False)[:4]
         return context
 

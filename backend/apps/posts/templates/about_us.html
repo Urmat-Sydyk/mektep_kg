@@ -1,0 +1,67 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Breadcrumb section -->
+	<div class="site-breadcrumb">
+		<div class="container">
+			<a href="#"><i class="fa fa-home"></i> Главная</a> <i class="fa fa-angle-right"></i>
+			<span>О Нас</span>
+		</div>
+	</div>
+	<!-- Breadcrumb section end -->
+
+
+	<!-- About section -->
+	<section class="about-section spad pt-0">
+		<div class="container">
+			<div class="section-title text-center">
+				<h3> О нашей школе</h3>
+				<p>{{ school_info.slogan }}</p>
+			</div>
+			<div class="row">
+				<div class="col-lg-6 about-text">
+					<h5>О нас</h5>
+					<p>{{ school_info.about_us|truncatechars:400 }}</p>
+					<h5 class="pt-4"> Наша история </h5>
+					<p>{{ school_info.our_history|truncatechars:500 }}</p>
+				</div>
+				<div class="col-lg-6 pt-5 pt-lg-0">
+					<img src="{{ school_info.school_image.url }}" alt="">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- About section end-->
+
+
+
+	<!-- Team section  -->
+	<section class="team-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h3>НАШИ ПРЕПОДАВАТЕЛИ</h3>
+				<p>Профессиональные стандарты и ожидания</p>
+			</div>
+			<div class="row">
+				{% for teacher in teachers %}
+				<div class="col-md-6 col-lg-3">
+					<div class="member">
+						{% if teacher.avatar %}
+						<div class="member-pic set-bg" data-setbg="{{ teacher.avatar.url}}">
+						</div>
+						{% else %}
+						<div class="member-pic set-bg" data-setbg="{% static '../media/teachers_images/teacher_default.jpg' %}">
+						</div>
+						{% endif %}
+						<h5>{{ teacher.middle_name }} {{teacher.last_name}}</h5>
+						<p>{{teacher.teacher.subject}}</p>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+	<!-- Team section end -->
+
+{% endblock %}
