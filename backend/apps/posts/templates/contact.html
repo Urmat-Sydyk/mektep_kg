@@ -1,0 +1,91 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Breadcrumb section -->
+	<div class="site-breadcrumb">
+		<div class="container">
+			<a href="#"><i class="fa fa-home"></i> Главная</a> <i class="fa fa-angle-right"></i>
+			<span>Контакты</span>
+		</div>
+	</div>
+	<!-- Breadcrumb section end -->
+
+
+	<!-- Courses section -->
+	<section class="contact-page spad pt-0">
+		<div class="container">
+			<div class="map-section">
+				<div class="contact-info-warp">
+					<div class="contact-info">
+						<h4>Адрес</h4>
+						<p>{{ school_info.address }}</p>
+					</div>
+					<div class="contact-info">
+						<h4>Телефон</h4>
+						<p>{{ school_info.phone }}</p>
+					</div>
+					<div class="contact-info">
+						<h4>Email</h4>
+						<p>{{ school_info.email }}</p>
+					</div>
+					<div class="contact-info">
+						<h4>Рабочее время</h4>
+						<p>{{ school_info.work_time }}</p>
+					</div>
+				</div>
+				<!-- Google map -->
+
+					<div class="map" id="map-canvas"></div>
+			</div>
+			<div class="contact-form spad pb-0">
+				<div class="section-title text-center">
+					<h3>Связаться</h3>
+					<p>Свяжитесь с нами для лучших предложений и сделок</p>
+				</div>
+				<form method="post" class="comment-form --contact" id="my-form">
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-lg-6">
+							{{ form.sender_name}}
+						</div>
+						<div class="col-lg-6">
+							{{ form.email}}
+						</div>
+						<div class="col-lg-6">
+							{{ form.phone}}
+						</div>
+						<div class="col-lg-6">
+							{{ form.title}}
+						</div>
+						<div class="col-lg-12">
+							{{ form.text}}
+
+							<div class="text-center">
+								<button class="site-btn" type="submit" id="submit-button">ОТПРАВИТЬ</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	<!-- Courses section end-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0YyDTa0qqOjIerob2VTIwo_XVMhrruxo"></script>
+<script src="{% static '../static/unico/js/map.js' %}"></script>
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+
+        $("#submit-button").on("click", function() {
+			$.post("http://127.0.0.1:8000/contact/", $("#my-form").serialize())
+				.done(function() { window.alert("Successfully submitted!"); })
+				.fail(function() { window.alert("Submission failed!"); });
+		});
+
+    </script>
+    {% endblock %}

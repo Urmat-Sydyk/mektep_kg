@@ -54,7 +54,7 @@ def userRegister(request):
 def user_logout(request):
     if request.user.is_authenticated:
         logout(request)
-    return redirect('sign_in')
+    return redirect('index')
 
 
 class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

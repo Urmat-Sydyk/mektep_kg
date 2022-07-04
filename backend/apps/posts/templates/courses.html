@@ -1,0 +1,60 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+
+
+{% block content %}
+<!-- Breadcrumb section -->
+	<div class="site-breadcrumb">
+		<div class="container">
+			<a href="#"><i class="fa fa-home"></i> Главная</a> <i class="fa fa-angle-right"></i>
+			<span>Кружки</span>
+		</div>
+	</div>
+	<!-- Breadcrumb section end -->
+
+<!-- Courses section -->
+	<section class="full-courses-section spad pt-0">
+		<div class="container">
+			<div class="row">
+				<!-- course item -->
+				{% for course in courses %}
+				<div class="col-lg-4 col-md-6 course-item">
+					<div class="course-thumb">
+						<img src="{{ course.image.url }}" alt="">
+						<div class="course-cat">
+							<span>{{course}}</span>
+						</div>
+					</div>
+					<div class="course-info">
+						<div class="date"><i class="fa fa-clock-o"></i> {{ course.updated }} </div>
+						<h4 class="cource-price">{{course.price}} сом <span>/месяц</span></h4>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="text-center">
+				<ul class="site-pageination">
+					{% if page_obj.has_previous %}
+					<li><a href="?page={{page_obj.previous_page_number}}"><i class="fa fa-angle-left"></i></a></li>
+					{% endif %}
+					{% for i in page_obj.paginator.get_elided_page_range %}
+					  {% if i == page_obj.paginator.ELLIPSIS %}
+					<li><a class="page-link" href="?page={{i}}">
+						{{i}}
+					</a></li>
+					  {% else %}
+					  <li><a class="{%if i == page_obj.number%} active {%endif%}" href="?page={{i}}">
+						{{i}}
+					</a></li>
+					  {% endif %}
+					{% endfor %}
+					{% if page_obj.has_next %}
+					<li><a href="?page={{page_obj.next_page_number}}"><i class="fa fa-angle-right"></i></a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</section>
+	<!-- Courses section end-->
+{% endblock %}

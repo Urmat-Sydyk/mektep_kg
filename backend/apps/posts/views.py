@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -7,10 +8,12 @@ from datetime import date
 
 
 # Create your views here.
-from django.views.generic import ListView, TemplateView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, TemplateView, DetailView, UpdateView, CreateView
 
 from backend.apps.accounts.models import User
 from backend.apps.lessons.models import Subject
+from backend.apps.posts.forms import SendMessageForm
 from backend.apps.posts.models import Post
 from backend.apps.school_info.models import SchoolInfo, Course, Gallery, Service, SocialLink
 
@@ -49,4 +52,31 @@ class AboutUsView(ListView):
         context = super(AboutUsView, self).get_context_data(**kwargs)
         context['teachers'] = User.objects.filter(role=False)[:4]
         return context
+
+
+class CoursesView(ListView):
+    model = Course
+    template_name = 'courses.html'
+    paginate_by = 3
+    ordering = ['-created']
+    context_object_name = 'courses'
+
+
+class NewsView(ListView):
+    model = Post
+    template_name = 'news.html'
+    paginate_by = 4
+
+    def get_context_data(self, **kwargs):
+        context = super(NewsView, self).get_context_data(**kwargs)
+        p = Paginator(Post.objects.all().order_by('-updated'), self.paginate_by)
+        context['posts'] = p.page(context['page_obj'].number)
+        context['recents'] = Post.objects.all().order_by('-updated')[:5]
+        return context
+
+
+class SendMessageView(CreateView):
+    form_class = SendMessageForm
+    template_name = 'contact.html'
+    success_url = reverse_lazy('contact')
 

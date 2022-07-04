@@ -55,3 +55,11 @@ class SocialLinkAdmin(admin.ModelAdmin):
         'awesome_class',
         'link'
     ]
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = [
+        'sender_name',
+        'title',
+        'text'
+    ]

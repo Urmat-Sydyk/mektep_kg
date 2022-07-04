@@ -85,9 +85,9 @@
 			<ul class="main-menu" style="margin-bottom: 0px">
 				<li class="active"><a href="{% url 'index' %}">Главная</a></li>
 				<li><a href="{% url 'about' %}">О Нас</a></li>
-				<li><a href="course.html">Кружки</a></li>
-				<li><a href="blog.html">Новости</a></li>
-				<li><a href="contact.html">Контакты</a></li>
+				<li><a href="{% url 'course' %}">Кружки</a></li>
+				<li><a href="{% url 'news' %}">Новости</a></li>
+				<li><a href="{% url 'contact' %}">Контакты</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -163,5 +163,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Вс�
 	<script src="{% static '/unico/js/masonry.pkgd.min.js' %}"></script>
 	<script src="{% static '/unico/js/magnific-popup.min.js' %}"></script>
 	<script src="{% static '/unico/js/main.js' %}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {% block javascript %}
+
+    {% endblock %}
 </body>
 </html>
