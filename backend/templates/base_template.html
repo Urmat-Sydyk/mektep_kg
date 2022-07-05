@@ -192,8 +192,10 @@
         <div class="image">
           {% if request.user.avatar %}
           <img src="{{ request.user.avatar.url }}" class="img-circle elevation-2" alt="User Image">
-          {% else %}
+          {% elif not request.user.avatar and request.user.role %}
           <img src="{% static '../media/teachers_images/default_user_image.png' %}" class="img-circle elevation-2" alt="User Image">
+          {% elif not request.user.avatar and not request.user.role %}
+          <img src="{% static '../media/teachers_images/teacher_default.jpg' %}" class="img-circle elevation-2" alt="User Image">
           {% endif %}
         </div>
 
@@ -221,13 +223,28 @@
                with font-awesome or any other icon font library -->
 
           <li class="nav-item">
+
+            <!-- Link for students -->
+            {% if request.user.role %}
             <a href="{% url 'user_profile' %}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Профиль пользователя
               </p>
             </a>
+            <!--  Link for teachers -->
+            {% else %}
+            <a href="{% url 'teacher_profile' %}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Профиль пользователя
+              </p>
+            </a>
+            {% endif %}
           </li>
+
+          <!--  Menu buttons for student -->
+          {% if request.user.role %}
           <li class="nav-item">
             <a href="{% url 'student_time_table' request.user.id %}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -244,6 +261,8 @@
               </p>
             </a>
           </li>
+          {% endif %}
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

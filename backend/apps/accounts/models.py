@@ -87,6 +87,9 @@ class TeacherProfile(models.Model):
         verbose_name = 'Профиль преподавателя'
         verbose_name_plural = 'Профили преподавателей'
 
+    def __str__(self):
+        return self.position
+
 
 class StudentProfile(models.Model):
     user = models.OneToOneField(

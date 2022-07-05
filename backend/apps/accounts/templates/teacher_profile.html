@@ -1,0 +1,129 @@
+{% extends 'base_template.html' %}
+{% load static %}
+{% block header_title %}
+<div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Мой профиль</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Мой профиль</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+{% endblock %}
+{% block content %}
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                    {% if request.user.avatar %}
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="{{ request.user.avatar.url }}"
+                       alt="User profile picture">
+                    {% else %}
+                     <img class="profile-user-img img-fluid img-circle"
+                       src="{% static '../media/teachers_images/default_user_image.png' %}"
+                       alt="User profile picture">
+                    {% endif %}
+                </div>
+
+                <h3 class="profile-username text-center">{{ request.user.first_name}} {{ request.user.middle_name}} {{ request.user.last_name}}</h3>
+
+                <p class="text-muted text-center">{{ request.user.pin }}</p>
+
+                <div class="card-body">
+                    <strong><i class="fas fa-book mr-1"></i>Должность</strong>
+                    <p class="text-muted">{{ request.user.teacher.position }}</p>
+                    <hr>
+                    <strong><i class="fas fa-map-marker-alt mr-1"></i>Адрес проживания</strong>
+                    <p class="text-muted">{{ request.user.address }}</p>
+                    <hr>
+                    <strong><i class="fas fa-pencil-alt mr-1"></i>Дата рождения</strong>
+                    <p class="text-muted">{{ request.user.birthday }}</p>
+                    <hr>
+                    <strong><i class="far fa-file-alt mr-1"></i>Телефон</strong>
+                    <p class="text-muted">{{ request.user.phone }}</p>
+                    <hr>
+
+                    <strong><i class="far fa-file-alt mr-1"></i>Предмет</strong>
+                    <p class="text-muted">{{ request.user.teacher.subject }}</p>
+                </div>
+                <a href="{% url 'user_update' request.user.id %}"><button type="button" class="btn btn-block bg-gradient-primary">Редактировать</button></a>
+                <hr>
+                <a href="{% url 'change_password' %}"><button type="button" class="btn btn-block bg-gradient-secondary">Сменить пароль</button></a>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+          </div>
+          <!-- /.col -->
+<!--          <div class="col-md-9">-->
+<!--            <div class="card card-primary">-->
+<!--              <div class="card-header">-->
+<!--                <ul class="nav nav-pills">-->
+<!--                  <h3 class="card-title">Уголок "{{ request.user.student.student_group }}" класса</h3>-->
+<!--&lt;!&ndash;                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>&ndash;&gt;-->
+<!--                </ul>-->
+<!--              </div>&lt;!&ndash; /.card-header &ndash;&gt;-->
+
+
+<!--              <div class="card-body">-->
+<!--                <div class="tab-content">-->
+<!--                  <div class="active tab-pane" id="activity">-->
+<!--                    &lt;!&ndash; Post &ndash;&gt;-->
+
+<!--                    {% for post in posts %}-->
+<!--                      {{ posts.post_authors }}-->
+<!--                    <div class="post">-->
+<!--                      <div class="user-block">-->
+<!--                        <img class="img-circle img-bordered-sm" src="" alt="">-->
+<!--                        <span class="username">-->
+<!--                          <a href="#">{{post.author}}</a>-->
+<!--                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>-->
+<!--                        </span>-->
+<!--                        <span class="description">Опубликовано - {{post.created}}</span>-->
+<!--                      </div>-->
+<!--                      &lt;!&ndash; /.user-block &ndash;&gt;-->
+<!--                      <p>{{post.content|truncatechars:500}}</p>-->
+<!--                      <img src="{{ post.image.url }}" class="img-fluid">-->
+<!--                      <p>-->
+<!--                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>-->
+<!--                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>-->
+<!--                        <span class="float-right">-->
+<!--                          <a href="#" class="link-black text-sm">-->
+<!--                            <i class="far fa-comments mr-1"></i> Comments (5)-->
+<!--                          </a>-->
+<!--                        </span>-->
+<!--                      </p>-->
+
+<!--                      <input class="form-control form-control-sm" type="text" placeholder="Type a comment">-->
+<!--                    </div>-->
+<!--                     {% endfor %}-->
+<!--                    &lt;!&ndash; /.post &ndash;&gt;-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; /.tab-content &ndash;&gt;-->
+<!--              </div>&lt;!&ndash; /.card-body &ndash;&gt;-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; /.card &ndash;&gt;-->
+<!--          </div>-->
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+
+{% endblock %}

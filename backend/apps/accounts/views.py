@@ -27,9 +27,12 @@ class LoginView(FormView):
         if user is not None:
             if user.is_active:
                 login(self.request, user)
-                return redirect('user_profile')
+                if user.role:
+                    return redirect('user_profile')
+                else:
+                    return redirect('teacher_profile')
             else:
-                return HttpResponse('Ваш аккаунт не активен')
+                return HttpResponse('Ваш аккаунт не активен, обратитесь к администратору')
         return HttpResponse('Такого пользователя не сушествует или пароль неверный')
 
 
@@ -84,6 +87,9 @@ class UserProfilePage(LoginRequiredMixin, ListView):
     def post_authors():
         return User.objects.filter(role=False)
 
+
+class TeacherProfilePage(LoginRequiredMixin, TemplateView):
+    template_name = 'teacher_profile.html'
 
 
 class UserPasswordChangeView(PasswordChangeView):

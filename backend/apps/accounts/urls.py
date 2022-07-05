@@ -2,7 +2,8 @@ from django.urls import path
 from django.contrib.auth import views as auth_view
 from .views import *
 urlpatterns = [
-    path('', UserProfilePage.as_view(), name='user_profile'),
+    path('profile/student/', UserProfilePage.as_view(), name='user_profile'),
+    path('profile/teacher/', TeacherProfilePage.as_view(), name='teacher_profile'),
     path('login/', LoginView.as_view(), name='sign_in'),
     path('register/', userRegister, name='register'),
     path('logout/', user_logout, name='logout'),
