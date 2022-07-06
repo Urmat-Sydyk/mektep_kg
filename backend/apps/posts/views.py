@@ -1,8 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.db import models
 from datetime import date
 
@@ -13,7 +14,7 @@ from django.views.generic import ListView, TemplateView, DetailView, UpdateView,
 
 from backend.apps.accounts.models import User
 from backend.apps.lessons.models import Subject
-from backend.apps.posts.forms import SendMessageForm
+from backend.apps.posts.forms import SendMessageForm, CreatePostForm, PostUpdateForm
 from backend.apps.posts.models import Post
 from backend.apps.school_info.models import SchoolInfo, Course, Gallery, Service, SocialLink
 
@@ -80,3 +81,16 @@ class SendMessageView(CreateView):
     template_name = 'contact.html'
     success_url = reverse_lazy('contact')
 
+
+class CreatePostView(LoginRequiredMixin, CreateView):
+    template_name = "create_post.html"
+    form_class = CreatePostForm
+    success_url = reverse_lazy('teacher_profile')
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = PostUpdateForm
+    template_name = 'edit_post.html'
+    success_url = reverse_lazy('teacher_profile')
+    queryset = Post.objects.all()
+    model = Post

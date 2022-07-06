@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="{% static '/plugins/daterangepicker/daterangepicker.css' %}">
   <!-- summernote -->
   <link rel="stylesheet" href="{% static '/plugins/summernote/summernote-bs4.min.css' %}">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -205,16 +206,16 @@
       </div>
       {% endif %}
       <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+<!--      <div class="form-inline">-->
+<!--        <div class="input-group" data-widget="sidebar-search">-->
+<!--          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">-->
+<!--          <div class="input-group-append">-->
+<!--            <button class="btn btn-sidebar">-->
+<!--              <i class="fas fa-search fa-fw"></i>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -262,7 +263,24 @@
             </a>
           </li>
           {% endif %}
-
+         {% if not request.user.role %}
+          <li class="nav-item">
+            <a href="{% url 'teacher_grade_table' %}" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Журнал оценок
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'teacher_time_table' request.user.id %}" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Расписание занятий
+              </p>
+            </a>
+          </li>
+          {% endif %}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -332,7 +350,7 @@
 <!-- AdminLTE App -->
 <script src="{% static '/dist/js/adminlte.js' %}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{% static '/dist/js/demo.js' %}"></script>
+<!--<script src="{% static '/dist/js/demo.js' %}"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{% static '/dist/js/pages/dashboard.js' %}"></script>
 </body>

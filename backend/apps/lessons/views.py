@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 
 # Create your views here.
@@ -7,8 +8,10 @@ from django.http import HttpResponse
 
 
 # Create your views here.
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 
+from backend.apps.lessons.forms import CreateGradeForm
 from backend.apps.lessons.models import *
 
 
@@ -51,3 +54,17 @@ class StudentGradeTableView(ListView):
         return grades_data
 
 
+class CreateGradeView(LoginRequiredMixin, CreateView):
+    template_name = "teacher_grade_table.html"
+    form_class = CreateGradeForm
+    success_url = reverse_lazy('teacher_grade_table')
+
+
+class TeacherTimeTableView(ListView):
+    model = TimeTable
+    template_name = 'teacher_time_table.html'
+    context_object_name = 'time_tables'
+
+    def get_queryset(self):
+        queryset = TimeTable.objects.filter(teacher=self.request.user.id).order_by('lesson')
+        return queryset

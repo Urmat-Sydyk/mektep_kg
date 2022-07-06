@@ -84,17 +84,17 @@
                     <!-- Post -->
 
                     {% for post in posts %}
-                      {{ posts.post_authors }}
+<!--                     {{ posts.post_authors }}-->
                     <div class="post">
                       <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="" alt="">
+                        <img class="img-circle img-bordered-sm" src="{{ author_image.avatar.url }}" alt="">
                         <span class="username">
                           <a href="#">{{post.author}}</a>
-                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                         </span>
                         <span class="description">Опубликовано - {{post.created}}</span>
                       </div>
                       <!-- /.user-block -->
+                        <h3 style="color:black">{{post.title}}</h3>
                       <p>{{post.content|truncatechars:500}}</p>
                       <img src="{{ post.image.url }}" class="img-fluid">
                       <p>

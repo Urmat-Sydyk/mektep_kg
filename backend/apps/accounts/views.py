@@ -83,17 +83,27 @@ class UserProfilePage(LoginRequiredMixin, ListView):
         queryset = Post.objects.filter(group=self.request.user.student.student_group)
         return queryset
 
-    @staticmethod
-    def post_authors():
-        return User.objects.filter(role=False)
+    # def get_context_data(self, **kwargs):
+    #     context = super(UserProfilePage, self).get_context_data(**kwargs)
+    #     context['author_image'] = User.objects.get.filter(id=Post.author)
+    #     return context
+
+# Post author image
+    # @staticmethod
+    # def post_authors():
+    #     return User.objects.filter(role=False)
 
 
-class TeacherProfilePage(LoginRequiredMixin, TemplateView):
+class TeacherProfilePage(LoginRequiredMixin, ListView):
+    model = Post
     template_name = 'teacher_profile.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        queryset = Post.objects.filter(author=self.request.user.id).order_by('-updated')
+        return queryset
 
 
 class UserPasswordChangeView(PasswordChangeView):
     template_name = 'change_password.html'
-    success_url=reverse_lazy('logout')
-
-
+    success_url = reverse_lazy('logout')

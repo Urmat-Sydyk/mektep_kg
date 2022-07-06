@@ -1,0 +1,95 @@
+{% extends 'base_template.html' %}
+{% load static %}
+{% block header_title %}
+  <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Мой профиль</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Главная</a></li>
+              <li class="breadcrumb-item ">Мой профиль</li>
+              <li class="breadcrumb-item active"><a href="#">Редактировать публикацию</a></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+{% endblock %}
+{% block content %}
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title"> Редактировать публикацию</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    <label >Заголовок</label>
+                    {{form.title}}
+                  </div>
+                  <div class="form-group">
+                    <label >Содержание</label>
+                    {{form.content}}
+                  </div>
+                  <div class="form-group">
+                    <label >Изображение</label>
+                    {{form.image}}
+                  </div>
+                  <div class="form-group">
+                    <label>Класс</label>
+                    {{form.group}}
+                  </div>
+                  <div class="form-group">
+                    <label>Автор</label>
+                    {{form.author}}
+                  </div>
+<!--                  <div class="form-group">-->
+<!--                    <label for="exampleInputPassword1">Password</label>-->
+<!--                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">-->
+<!--                  </div>-->
+<!--                  <div class="form-group mb-0">-->
+<!--                    <div class="custom-control custom-checkbox">-->
+<!--                      <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">-->
+<!--                      <label class="custom-control-label" for="exampleCheck1">I agree to the <a href="#">terms of service</a>.</label>-->
+<!--                    </div>-->
+<!--                  </div>-->
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+            </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6">
+
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+
+{% endblock %}
+
+<!--<form method="post">-->
+<!--    {% csrf_token %}-->
+<!--    {{form}}-->
+<!--    <button type="submit">Сохранить</button>-->
+<!--</form>-->
+

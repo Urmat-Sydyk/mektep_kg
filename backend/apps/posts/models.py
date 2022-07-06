@@ -10,7 +10,7 @@ class Post(models.Model):
     content = models.TextField(verbose_name='Контент')
     image = models.ImageField(upload_to='posts/')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор', limit_choices_to={'role': False})
-    group = models.ForeignKey(StudentGroup, on_delete=models.PROTECT, verbose_name='Класс')
+    group = models.ForeignKey(StudentGroup, on_delete=models.PROTECT, verbose_name='Класс', null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
 
