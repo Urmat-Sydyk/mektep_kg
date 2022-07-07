@@ -49,8 +49,6 @@ class StudentGradeTableView(ListView):
                 grades_data[i.subject][str(i.grade_date)] = str(i.value)
                 # if str(i.grade_date) not in grades_data['all_dates']:
                 #     grades_data['all_dates'].append(str(i.grade_date))
-
-        print(grades_data)
         return grades_data
 
 
@@ -58,6 +56,8 @@ class CreateGradeView(LoginRequiredMixin, CreateView):
     template_name = "teacher_grade_table.html"
     form_class = CreateGradeForm
     success_url = reverse_lazy('teacher_grade_table')
+
+
 
 
 class TeacherTimeTableView(ListView):
@@ -68,3 +68,23 @@ class TeacherTimeTableView(ListView):
     def get_queryset(self):
         queryset = TimeTable.objects.filter(teacher=self.request.user.id).order_by('lesson')
         return queryset
+
+
+class TeacherGradeTableView(LoginRequiredMixin, ListView):
+    template_name = "teacher_grade_table_list.html"
+    model = Grade
+    context_object_name = 'grades'
+
+    def get_queryset(self):
+        queryset = Grade.objects.filter(teacher=self.request.user.id)
+        data = {}
+        for i in queryset:
+            if str(i.student) not in data:
+                data[str(i.student)] = {str(i.subject): [str(i.value)]}
+            else:
+                if str(i.subject) not in data[str(i.student)]:
+                    data[str(i.student)][str(i.subject)] = [str(i.value)]
+                else:
+                    data[str(i.student)][str(i.subject)].append(str(i.value))
+        print(data)
+        return data

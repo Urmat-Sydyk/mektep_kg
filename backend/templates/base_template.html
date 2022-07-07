@@ -258,7 +258,7 @@
             <a href="{% url 'student_grade_table' request.user.id %}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Дневник оценок
+                Дневник успеваемости
               </p>
             </a>
           </li>
@@ -268,7 +268,7 @@
             <a href="{% url 'teacher_grade_table' %}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Журнал оценок
+                Поставить оценку
               </p>
             </a>
           </li>
@@ -277,6 +277,14 @@
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Расписание занятий
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'teacher_grade_table_list' %}" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Успеваемость учеников
               </p>
             </a>
           </li>

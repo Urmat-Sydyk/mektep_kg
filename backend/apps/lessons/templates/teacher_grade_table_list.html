@@ -1,0 +1,126 @@
+{% extends 'base_template.html' %}
+{% load static %}
+{% block header_title %}
+
+<!--!<!doctype html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport"-->
+<!--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+<!--    <title>Document</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<table>-->
+<!--    {% for key, value in grades.items %}-->
+<!--    <tr>-->
+<!--        <td>{{key}}</td>-->
+<!--        {% for key, values in value.items %}-->
+<!--            <tr>-->
+<!--                <td>{{key}}</td>-->
+<!--                {%for i in values%}-->
+<!--                <td>{{i}}</td>-->
+<!--                {% endfor %}-->
+<!--            </tr>-->
+<!--        {%endfor%}-->
+<!--    </tr>-->
+<!--    {% endfor %}-->
+
+<!--</table>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+
+  <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Мой профиль</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item ">Мой профиль</li>
+              <li class="breadcrumb-item ">Расписание занятий</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+{% endblock header_title %}
+
+
+{% block content %}
+<section class="content">
+  <div class="container-fluid">
+<div class="row">
+<div class="col-md-6">
+<div class="card card-info">
+  <div class="card-header">
+    <h3 class="card-title">Оценки учеников</h3>
+  </div>
+              <!-- /.card-header -->
+  <div class="card-body">
+
+<table class="table table-bordered">
+    {% for key, value in grades.items %}
+    <thead>
+    <tr>
+        <th>{{key}}</th>
+    </tr>
+    </thead>
+    <tr>
+<!--        <td>{{key}}</td>-->
+        {% for key, values in value.items %}
+     <tbody>
+            <tr>
+                <td>{{key}}</td>
+                {%for i in values%}
+                <td>{{i}}</td>
+                {% endfor %}
+            </tr>
+        {%endfor%}
+     </tbody>
+    </tr>
+    {% endfor %}
+
+</table>
+
+
+
+<!--    <table class="table table-bordered">-->
+<!--      <thead>-->
+<!--        <tr>-->
+<!--          <th style="width: 10px">№</th>-->
+<!--          <th>Время</th>-->
+<!--          <th>Предмет</th>-->
+<!--          <th >Преподаватель</th>-->
+<!--          <th >Кабинет</th>-->
+<!--          <th >Класс</th>-->
+<!--        </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      {% for i in time_tables %}-->
+<!--      {% if i.weeks == '1'%}-->
+<!--        <tr>-->
+<!--          <td></td>-->
+<!--          <td>{{i.lesson}}</td>-->
+<!--          <td>{{ i.subject }}</td>-->
+<!--          <td>{{i.teacher}}</td>-->
+<!--          <td>{{i.room}}</td>-->
+<!--          <td>{{i.student_group}}</td>-->
+<!--        </tr>-->
+<!--      {% endif %}-->
+<!--      {% endfor %}-->
+<!--      </tbody>-->
+<!--    </table>-->
+  </div>
+</div>
+</div>
+</div>
+  </div> </section>
+{% endblock %}
